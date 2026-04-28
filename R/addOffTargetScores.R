@@ -151,7 +151,7 @@ setMethod("addOffTargetScores", "NULL", function(object){
     }
     # Check metadata of GuideSet nuclease vs. crisprBase
     tryCatch(
-            utils::data(nm, package = "crisprBase", envir = environment()),
+            utils::data(list = nm, package = "crisprBase", envir = environment()),
             warning = function(w) NULL,
             error   = function(e) NULL
     )
