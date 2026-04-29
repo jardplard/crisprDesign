@@ -252,7 +252,7 @@ TxDb2GRangesList <- function(txdb,
     transcripts$tx_id <- transcripts$tx_name
     transcripts$tx_name <- NULL
     if (!is.null(bm)){
-        wh <- match(transcripts$tx_id, bm$ensembl_transcript_id)
+        wh <- match(sub("\\..*", "", transcripts$tx_id), bm$ensembl_transcript_id)
         transcripts$gene_symbol <- bm$external_gene_name[wh]
     } else {
         transcripts$gene_symbol <- NA
@@ -294,7 +294,7 @@ TxDb2GRangesList <- function(txdb,
     exons$cds_len <- cds_len$cds_len[match(exons$tx_id, cds_len$tx_id)]
     # add gene_symbol using biomaRt
     if (!is.null(bm)){
-        wh <- match(exons$gene_id, bm$ensembl_gene_id)
+        wh <- match(sub("\\..*", "", exons$tx_name), bm$ensembl_transcript_id)
         exons$gene_symbol <- bm$external_gene_name[wh]
     } else {
         exons$gene_symbol <- NA
@@ -358,7 +358,7 @@ TxDb2GRangesList <- function(txdb,
     #fiveUTRs$tx_id   <- exonInfo$TXNAME[wh]
     #fiveUTRs$gene_id <- exonInfo$GENEID[wh]
     if (!is.null(bm)){
-        wh <- match(fiveUTRs$tx_id, bm$ensembl_transcript_id)
+        wh <- match(sub("\\..*", "", fiveUTRs$tx_id), bm$ensembl_transcript_id)
         fiveUTRs$gene_symbol <- bm$external_gene_name[wh]
     } else {
         fiveUTRs$gene_symbol <- NA
@@ -386,7 +386,7 @@ TxDb2GRangesList <- function(txdb,
     #threeUTRs$tx_id   <- exonInfo$TXNAME[wh]
     #threeUTRs$gene_id <- exonInfo$GENEID[wh]
     if (!is.null(bm)){
-        wh <- match(threeUTRs$tx_id, bm$ensembl_transcript_id)
+        wh <- match(sub("\\..*", "", threeUTRs$tx_id), bm$ensembl_transcript_id)
         threeUTRs$gene_symbol <- bm$external_gene_name[wh]
     } else {
         threeUTRs$gene_symbol <- NA
@@ -401,7 +401,7 @@ TxDb2GRangesList <- function(txdb,
     introns$tx_id <- introns$tx_name
     introns$tx_name <- NULL
     if (!is.null(bm)){
-        wh <- match(introns$tx_id, bm$ensembl_transcript_id)
+        wh <- match(sub("\\..*", "", introns$tx_id), bm$ensembl_transcript_id)
         introns$gene_symbol <- bm$external_gene_name[wh]
     } else {
         introns$gene_symbol <- NA
@@ -421,7 +421,7 @@ TxDb2GRangesList <- function(txdb,
     wh <- match(promoters$tx_id, exonInfo$TXNAME)
     promoters$gene_id <- exonInfo$GENEID[wh]
     if (!is.null(bm)){
-        wh <- match(promoters$tx_id, bm$ensembl_transcript_id)
+        wh <- match(sub("\\..*", "", promoters$tx_id), bm$ensembl_transcript_id)
         promoters$gene_symbol <- bm$external_gene_name[wh]
     } else {
         promoters$gene_symbol <- NA
